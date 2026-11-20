@@ -1,0 +1,943 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>سُؤْدَد | SODAD — للرجل الذي يقود، لا يتبع</title>
+    <meta
+      name="description"
+      content="سُؤْدَد (SODAD) — بيت أناقة الرجل. للرجل الذي يقود، لا يتبع."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --logo-url: url("./logo.JPG");
+        --gold: #c5a059;
+        --beige: #b69f8a;
+        --leather: #5c2c16;
+        --radius: 16px;
+        --transition: 0.26s ease;
+      }
+
+      /* الوضع النهاري الافتراضي (Light Mode) */
+      html[data-theme="light"] {
+        --bg-base: #f4efe8;
+        --scrim: rgba(244, 239, 232, 0.84);
+        --surface: rgba(255, 253, 249, 0.85);
+        --surface-hover: rgba(255, 253, 249, 0.98);
+        --primary-bg: rgba(197, 160, 89, 0.16);
+        --primary-hover: rgba(197, 160, 89, 0.28);
+        --border: rgba(12, 11, 9, 0.12);
+        --border-accent: rgba(92, 44, 22, 0.45);
+        --text-main: #14120f;
+        --text-muted: #5c2c16;
+        --shadow: 0 12px 28px rgba(20, 18, 15, 0.08);
+      }
+
+      /* الوضع الليلي (Dark Mode) */
+      html[data-theme="dark"] {
+        --bg-base: #0c0b09;
+        --scrim: rgba(12, 11, 9, 0.8);
+        --surface: rgba(22, 20, 17, 0.82);
+        --surface-hover: rgba(34, 30, 25, 0.94);
+        --primary-bg: rgba(197, 160, 89, 0.16);
+        --primary-hover: rgba(197, 160, 89, 0.26);
+        --border: rgba(182, 159, 138, 0.22);
+        --border-accent: rgba(197, 160, 89, 0.55);
+        --text-main: #f3ede4;
+        --text-muted: #b69f8a;
+        --shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        font-family:
+          "Cairo",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background-color: var(--bg-base);
+        color: var(--text-main);
+        position: relative;
+        overflow-x: hidden;
+        transition:
+          background-color var(--transition),
+          color var(--transition);
+      }
+
+      /* خلفية اللوجو المموهة */
+      .bg-logo-layer {
+        position: fixed;
+        inset: -45px;
+        background-image: var(--logo-url);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        filter: blur(28px) saturate(1.12);
+        transform: scale(1.12);
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .bg-scrim {
+        position: fixed;
+        inset: 0;
+        background: var(--scrim);
+        z-index: 1;
+        pointer-events: none;
+        transition: background var(--transition);
+      }
+
+      .container {
+        position: relative;
+        z-index: 2;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 26px 18px 46px;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+      }
+
+      .top-bar {
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      .theme-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text-main);
+        font-family: inherit;
+        font-size: 0.84rem;
+        font-weight: 700;
+        cursor: pointer;
+        backdrop-filter: blur(12px);
+        box-shadow: var(--shadow);
+        transition:
+          transform var(--transition),
+          background var(--transition),
+          border-color var(--transition);
+      }
+
+      .theme-toggle:hover {
+        transform: translateY(-1px);
+        border-color: var(--border-accent);
+      }
+
+      .profile-header {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .avatar-ring {
+        width: 104px;
+        height: 104px;
+        border-radius: 50%;
+        padding: 3px;
+        background: linear-gradient(
+          135deg,
+          var(--gold),
+          var(--beige),
+          var(--leather)
+        );
+        box-shadow: var(--shadow);
+        margin-bottom: 6px;
+      }
+
+      .avatar-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        display: block;
+      }
+
+      .brand-name {
+        font-size: 1.65rem;
+        font-weight: 700;
+      }
+
+      .brand-en {
+        font-size: 0.98rem;
+        font-weight: 700;
+        color: var(--gold);
+        letter-spacing: 1.5px;
+        margin-right: 4px;
+      }
+
+      .brand-sub {
+        font-size: 0.92rem;
+        color: var(--text-muted);
+        font-weight: 600;
+      }
+
+      .brand-slogan {
+        margin-top: 6px;
+        padding: 8px 16px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        backdrop-filter: blur(10px);
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--text-main);
+      }
+
+      .section-label {
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        padding: 0 4px;
+        margin-top: 4px;
+      }
+
+      .links-list {
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+      }
+
+      .link-card {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        width: 100%;
+        text-align: right;
+        padding: 14px 17px;
+        border-radius: var(--radius);
+        text-decoration: none;
+        font-family: inherit;
+        color: var(--text-main);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        backdrop-filter: blur(14px);
+        box-shadow: var(--shadow);
+        cursor: pointer;
+        transition:
+          transform var(--transition),
+          background var(--transition),
+          border-color var(--transition);
+      }
+
+      .link-card:hover {
+        transform: translateY(-2px);
+        background: var(--surface-hover);
+        border-color: var(--border-accent);
+      }
+
+      .link-card.primary {
+        background: var(--primary-bg);
+        border-color: var(--border-accent);
+      }
+
+      .link-card.primary:hover {
+        background: var(--primary-hover);
+      }
+
+      .link-badge {
+        width: 36px;
+        height: 34px;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        font-size: 0.76rem;
+        font-weight: 700;
+        color: var(--gold);
+        background: rgba(197, 160, 89, 0.14);
+        border: 1px solid rgba(197, 160, 89, 0.28);
+        flex-shrink: 0;
+      }
+
+      .link-content {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        flex: 1;
+      }
+
+      .link-title {
+        font-size: 0.98rem;
+        font-weight: 700;
+      }
+
+      .link-desc {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+      }
+
+      .link-desc.ltr-note {
+        direction: ltr;
+        text-align: right;
+      }
+
+      .link-arrow {
+        font-size: 1.05rem;
+        color: var(--gold);
+        transition: transform var(--transition);
+      }
+
+      .link-card:hover .link-arrow {
+        transform: translateX(-4px);
+      }
+
+      .footer {
+        margin-top: 6px;
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        font-weight: 600;
+      }
+
+      /* عارض الاستوري (Instagram Story Modal) */
+      .story-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+        background: rgba(8, 7, 6, 0.88);
+        backdrop-filter: blur(10px);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+      }
+
+      .story-backdrop.active {
+        display: flex;
+      }
+
+      .story-frame {
+        position: relative;
+        width: 100%;
+        max-width: 410px;
+        aspect-ratio: 9 / 16;
+        max-height: 90vh;
+        border-radius: 22px;
+        overflow: hidden;
+        background: #0c0b09;
+        border: 1px solid rgba(197, 160, 89, 0.4);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .story-progress-row {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        z-index: 5;
+        display: flex;
+        gap: 6px;
+      }
+
+      .story-progress-bar {
+        flex: 1;
+        height: 3px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.28);
+        overflow: hidden;
+      }
+
+      .story-progress-fill {
+        height: 100%;
+        width: 0%;
+        background: var(--gold);
+        transition: none;
+      }
+
+      .story-header {
+        position: absolute;
+        top: 24px;
+        left: 14px;
+        right: 14px;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #fff;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+      }
+
+      .story-meta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .story-avatar {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 1.5px solid var(--gold);
+      }
+
+      .story-title-group {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+      }
+
+      .story-heading {
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+
+      .story-counter {
+        font-size: 0.74rem;
+        color: #e6d7bd;
+        direction: ltr;
+        text-align: right;
+      }
+
+      .story-close {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        background: rgba(12, 11, 9, 0.65);
+        color: #fff;
+        font-size: 1.15rem;
+        line-height: 1;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+      }
+
+      .story-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        user-select: none;
+      }
+
+      .story-empty {
+        margin: auto;
+        padding: 24px;
+        text-align: center;
+        color: #f3ede4;
+        font-size: 0.92rem;
+        line-height: 1.6;
+        display: none;
+      }
+
+      .story-empty.visible {
+        display: block;
+      }
+
+      .story-tap-zones {
+        position: absolute;
+        inset: 72px 0 0 0;
+        z-index: 4;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .tap-next,
+      .tap-prev {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-logo-layer" aria-hidden="true"></div>
+    <div class="bg-scrim" aria-hidden="true"></div>
+
+    <main class="container">
+      <div class="top-bar">
+        <button
+          id="themeToggle"
+          class="theme-toggle"
+          type="button"
+          aria-label="تبديل الوضع النهاري والليلي"
+        >
+          <span id="themeIcon">🌙</span>
+          <span id="themeLabel">Dark Mode</span>
+        </button>
+      </div>
+
+      <header class="profile-header">
+        <div class="avatar-ring">
+          <img src="./logo.JPG" alt="شعار سُؤْدَد SODAD" class="avatar-img" />
+        </div>
+        <h1 class="brand-name">سُؤْدَد</h1>
+        <p class="brand-sub">بَيــــتُ أَنَـــــــاقَةِ الــرَّجُـــل</p>
+        <p class="brand-slogan">
+          «لِلــــــــرَّجُلِ الَّــــــذِي يَــــــقُودُ، لَا يَتْبَــــــع»
+        </p>
+      </header>
+
+      <!-- الروابط الأساسية بالترتيب المطلوب -->
+      <nav class="links-list" aria-label="روابط سُؤْدَد الرسمية">
+        <a
+          class="link-card primary"
+          href="https://wa.me/201042436194?text=%D8%A3%D9%87%D9%84%D8%A7%D9%8B%20%D8%A8%D9%83%D9%85%20%D9%81%D9%8A%20%D8%B3%D9%8F%D8%A4%D9%8E%D8%AF%D9%8E%D8%AF%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%A7%D9%84%D9%85%D8%AC%D9%85%D9%88%D8%B9%D8%A9%20%D8%A7%D9%84%D8%AD%D8%A7%D9%84%D9%8A%D8%A9."
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="link-badge">01</span>
+          <span class="link-content">
+            <strong class="link-title">واتساب</strong>
+            <small class="link-desc ltr-note">+20 104 243 6194</small>
+          </span>
+          <span class="link-arrow">←</span>
+        </a>
+
+        <a
+          class="link-card"
+          href="https://instagram.com/sodad.eg"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="link-badge">02</span>
+          <span class="link-content">
+            <strong class="link-title">إنستجرام</strong>
+            <small class="link-desc ltr-note">instagram.com/sodad.eg</small>
+          </span>
+          <span class="link-arrow">←</span>
+        </a>
+
+        <a
+          class="link-card"
+          href="https://facebook.com/sodad.eg"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="link-badge">03</span>
+          <span class="link-content">
+            <strong class="link-title">فيسبوك</strong>
+            <small class="link-desc ltr-note">facebook.com/sodad.eg</small>
+          </span>
+          <span class="link-arrow">←</span>
+        </a>
+
+        <a
+          class="link-card"
+          href="https://tiktok.com/@sodad.eg"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="link-badge">04</span>
+          <span class="link-content">
+            <strong class="link-title">تيك توك</strong>
+            <small class="link-desc ltr-note">tiktok.com/@sodad.eg</small>
+          </span>
+          <span class="link-arrow">←</span>
+        </a>
+
+        <a class="link-card" href="mailto:sudad.brand@gmail.com">
+          <span class="link-badge">05</span>
+          <span class="link-content">
+            <strong class="link-title">الإيميل</strong>
+            <small class="link-desc ltr-note">sudad.brand@gmail.com</small>
+          </span>
+          <span class="link-arrow">←</span>
+        </a>
+      </nav>
+
+      <!-- أقسام الاستوري التفاعلية -->
+      <p class="section-label">استعراض سريع (Story)</p>
+      <section class="links-list" aria-label="أقسام سُؤْدَد المصورة">
+        <button type="button" class="link-card" data-story="catalog">
+          <span class="link-badge">CAT</span>
+          <span class="link-content">
+            <strong class="link-title">الكتالوج — المجموعة الحالية</strong>
+            <small class="link-desc" id="desc-catalog"
+              >يتم تحميل صور cat تلقائياً (3 ثوانٍ لكل صورة)</small
+            >
+          </span>
+          <span class="link-arrow">←</span>
+        </button>
+
+        <button type="button" class="link-card" data-story="reviews">
+          <span class="link-badge">REV</span>
+          <span class="link-content">
+            <strong class="link-title">تقييمات العملاء — Reviews</strong>
+            <small class="link-desc" id="desc-reviews"
+              >يتم تحميل صور rev تلقائياً (3 ثوانٍ لكل صورة)</small
+            >
+          </span>
+          <span class="link-arrow">←</span>
+        </button>
+
+        <button type="button" class="link-card" data-story="warranty">
+          <span class="link-badge">WAR</span>
+          <span class="link-content">
+            <strong class="link-title">عهد سُؤْدَد والضمان</strong>
+            <small class="link-desc" id="desc-warranty"
+              >حق المعاينة الكاملة، الضمان، والرعاية</small
+            >
+          </span>
+          <span class="link-arrow">←</span>
+        </button>
+
+        <button type="button" class="link-card" data-story="about">
+          <span class="link-badge">ABT</span>
+          <span class="link-content">
+            <strong class="link-title">عن سُؤْدَد</strong>
+            <small class="link-desc" id="desc-about"
+              >فلسفة العلامة وهوية بيت أناقة الرجل</small
+            >
+          </span>
+          <span class="link-arrow">←</span>
+        </button>
+      </section>
+
+      <footer class="footer">
+        <span>SODAD © 2026</span>
+        <span>•</span>
+        <span
+          >الــــــــرِّجَــــالُ يُــــــولَــــدُون، الْــــقَــادَةُ
+          يُصْــنَعُون</span
+        >
+      </footer>
+    </main>
+
+    <!-- نافذة عرض الاستوري بملء الشاشة -->
+    <div
+      id="storyBackdrop"
+      class="story-backdrop"
+      role="dialog"
+      aria-modal="true"
+      aria-label="عارض صور سُؤْدَد"
+    >
+      <div id="storyFrame" class="story-frame">
+        <div id="storyProgressRow" class="story-progress-row"></div>
+
+        <div class="story-header">
+          <div class="story-meta">
+            <img src="./logo.JPG" alt="سُؤْدَد" class="story-avatar" />
+            <div class="story-title-group">
+              <span id="storyTitle" class="story-heading"></span>
+              <span id="storyCounter" class="story-counter"></span>
+            </div>
+          </div>
+          <button
+            id="storyClose"
+            type="button"
+            class="story-close"
+            aria-label="إغلاق"
+          >
+            ×
+          </button>
+        </div>
+
+        <img id="storyImage" src="" alt="" class="story-image" />
+        <div id="storyEmpty" class="story-empty">
+          لا توجد صور متاحة في هذا القسم حالياً.
+        </div>
+
+        <div class="story-tap-zones" aria-hidden="true">
+          <button
+            id="tapPrev"
+            type="button"
+            class="tap-prev"
+            tabindex="-1"
+          ></button>
+          <button
+            id="tapNext"
+            type="button"
+            class="tap-next"
+            tabindex="-1"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const STORY_DURATION_MS = 3000;
+        const MAX_SCAN_INDEX = 50;
+        const EXTENSIONS = [".jpg", ".jpeg", ".png", ".webp"];
+
+        const STORIES = {
+          catalog: {
+            title: "الكتالوج — المجموعة الحالية",
+            prefix: "cat",
+            descId: "desc-catalog",
+            images: [],
+          },
+          reviews: {
+            title: "تقييمات العملاء — Reviews",
+            prefix: "rev",
+            descId: "desc-reviews",
+            images: [],
+          },
+          warranty: {
+            title: "عهد سُؤْدَد والضمان",
+            prefix: "war",
+            descId: "desc-warranty",
+            images: [],
+          },
+          about: {
+            title: "عن سُؤْدَد",
+            prefix: "about",
+            descId: "desc-about",
+            images: [],
+          },
+        };
+
+        /* تبديل الثيم والافتراضي Light Mode */
+        const htmlEl = document.documentElement;
+        const toggleBtn = document.getElementById("themeToggle");
+        const themeIcon = document.getElementById("themeIcon");
+        const themeLabel = document.getElementById("themeLabel");
+        const THEME_KEY = "sodad_link_theme";
+
+        function applyTheme(theme) {
+          const nextTheme = theme === "dark" ? "dark" : "light";
+          htmlEl.setAttribute("data-theme", nextTheme);
+          localStorage.setItem(THEME_KEY, nextTheme);
+
+          if (nextTheme === "light") {
+            themeIcon.textContent = "🌙";
+            themeLabel.textContent = "Dark Mode";
+          } else {
+            themeIcon.textContent = "☀️";
+            themeLabel.textContent = "Light Mode";
+          }
+        }
+
+        applyTheme(localStorage.getItem(THEME_KEY) || "light");
+
+        toggleBtn.addEventListener("click", () => {
+          const current = htmlEl.getAttribute("data-theme");
+          applyTheme(current === "light" ? "dark" : "light");
+        });
+
+        /* فحص وجود صورة واحدة بأي امتداد مدعوم */
+        function checkImageUrl(url) {
+          return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => resolve(url);
+            img.onerror = () => resolve(null);
+            img.src = url;
+          });
+        }
+
+        async function findImageForIndex(prefix, index) {
+          for (const ext of EXTENSIONS) {
+            const candidate = `./${prefix}${index}${ext}`;
+            const found = await checkImageUrl(candidate);
+            if (found) return found;
+          }
+          return null;
+        }
+
+        /* اكتشاف الصور المتتابعة تلقائياً (cat1, cat2... / rev1, rev2...) */
+        async function discoverSequentialImages(prefix) {
+          const foundList = [];
+          for (let i = 1; i <= MAX_SCAN_INDEX; i++) {
+            const match = await findImageForIndex(prefix, i);
+            if (!match) break;
+            foundList.push(match);
+          }
+          return foundList;
+        }
+
+        async function loadAllStories() {
+          await Promise.all(
+            Object.values(STORIES).map(async (story) => {
+              story.images = await discoverSequentialImages(story.prefix);
+              const descEl = document.getElementById(story.descId);
+              if (descEl) {
+                descEl.textContent = story.images.length
+                  ? `${story.images.length} صور • 3 ثوانٍ لكل صورة`
+                  : `أضف ملفات ${story.prefix}1.jpg ... في المجلد`;
+              }
+            }),
+          );
+        }
+
+        loadAllStories();
+
+        /* منطق الاستوري */
+        const backdrop = document.getElementById("storyBackdrop");
+        const frame = document.getElementById("storyFrame");
+        const progressRow = document.getElementById("storyProgressRow");
+        const storyTitleEl = document.getElementById("storyTitle");
+        const storyCounterEl = document.getElementById("storyCounter");
+        const storyImageEl = document.getElementById("storyImage");
+        const storyEmptyEl = document.getElementById("storyEmpty");
+        const closeBtn = document.getElementById("storyClose");
+        const tapPrevBtn = document.getElementById("tapPrev");
+        const tapNextBtn = document.getElementById("tapNext");
+
+        let activeStoryKey = null;
+        let activeIndex = 0;
+        let storyTimer = null;
+        let rafId = null;
+
+        function clearTimers() {
+          if (storyTimer) {
+            clearTimeout(storyTimer);
+            storyTimer = null;
+          }
+          if (rafId) {
+            cancelAnimationFrame(rafId);
+            rafId = null;
+          }
+        }
+
+        function buildProgressBars(count) {
+          progressRow.innerHTML = "";
+          for (let i = 0; i < count; i++) {
+            const bar = document.createElement("div");
+            bar.className = "story-progress-bar";
+            const fill = document.createElement("div");
+            fill.className = "story-progress-fill";
+            bar.appendChild(fill);
+            progressRow.appendChild(bar);
+          }
+        }
+
+        function animateCurrentBar(index) {
+          const fills = progressRow.querySelectorAll(".story-progress-fill");
+          fills.forEach((fill, idx) => {
+            fill.style.width = idx < index ? "100%" : "0%";
+          });
+
+          const activeFill = fills[index];
+          if (!activeFill) return;
+
+          const startTime = performance.now();
+
+          function step(now) {
+            const elapsed = now - startTime;
+            const pct = Math.min((elapsed / STORY_DURATION_MS) * 100, 100);
+            activeFill.style.width = pct + "%";
+            if (pct < 100) {
+              rafId = requestAnimationFrame(step);
+            }
+          }
+
+          rafId = requestAnimationFrame(step);
+        }
+
+        function showSlide(index) {
+          clearTimers();
+          const story = STORIES[activeStoryKey];
+          if (!story || !story.images.length) return;
+
+          if (index < 0) {
+            activeIndex = 0;
+          } else if (index >= story.images.length) {
+            closeStory();
+            return;
+          } else {
+            activeIndex = index;
+          }
+
+          const src = story.images[activeIndex];
+          storyImageEl.style.display = "block";
+          storyEmptyEl.classList.remove("visible");
+          storyImageEl.src = src;
+          storyImageEl.alt = `${story.title} — ${activeIndex + 1}`;
+          storyCounterEl.textContent = `${activeIndex + 1} / ${story.images.length}`;
+
+          animateCurrentBar(activeIndex);
+
+          storyTimer = setTimeout(() => {
+            showSlide(activeIndex + 1);
+          }, STORY_DURATION_MS);
+        }
+
+        async function openStory(key) {
+          const story = STORIES[key];
+          if (!story) return;
+
+          if (!story.images.length) {
+            story.images = await discoverSequentialImages(story.prefix);
+          }
+
+          activeStoryKey = key;
+          storyTitleEl.textContent = story.title;
+          backdrop.classList.add("active");
+
+          if (!story.images.length) {
+            progressRow.innerHTML = "";
+            storyCounterEl.textContent = "0 / 0";
+            storyImageEl.style.display = "none";
+            storyEmptyEl.textContent = `لم يتم العثور على صور تبدأ بـ "${story.prefix}1" في مجلد المشروع.`;
+            storyEmptyEl.classList.add("visible");
+            return;
+          }
+
+          buildProgressBars(story.images.length);
+          showSlide(0);
+        }
+
+        function closeStory() {
+          clearTimers();
+          backdrop.classList.remove("active");
+          activeStoryKey = null;
+          storyImageEl.src = "";
+          storyEmptyEl.classList.remove("visible");
+        }
+
+        document.querySelectorAll("[data-story]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            openStory(btn.getAttribute("data-story"));
+          });
+        });
+
+        closeBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          closeStory();
+        });
+
+        tapNextBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          showSlide(activeIndex + 1);
+        });
+
+        tapPrevBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          showSlide(activeIndex - 1);
+        });
+
+        frame.addEventListener("click", (e) => {
+          e.stopPropagation();
+        });
+
+        /* الخروج عند الضغط خارج البطاقة */
+        backdrop.addEventListener("click", () => {
+          closeStory();
+        });
+
+        /* الخروج عند الضغط على زر Escape */
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && backdrop.classList.contains("active")) {
+            closeStory();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
